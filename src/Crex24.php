@@ -6,6 +6,10 @@
 namespace Lin\Crex24;
 
 
+use Lin\Crex24\Api\Account;
+use Lin\Crex24\Api\Market;
+use Lin\Crex24\Api\Trading;
+
 class Crex24
 {
     protected $key;
@@ -14,7 +18,7 @@ class Crex24
 
     protected $options=[];
 
-    function __construct(string $key='',string $secret='',string $host='https://api.Crex24.pro'){
+    function __construct(string $key='',string $secret='',string $host='https://api.crex24.com'){
         $this->key=$key;
         $this->secret=$secret;
         $this->host=$host;
@@ -51,5 +55,12 @@ class Crex24
      * */
     public function market(){
         return  new Market($this->init());
+    }
+
+    /**
+     *
+     * */
+    public function trading(){
+        return  new Trading($this->init());
     }
 }

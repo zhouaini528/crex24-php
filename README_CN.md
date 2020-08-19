@@ -2,7 +2,7 @@
 
 Crex24 文档地址 [https://docs.crex24.com/trade-api/v2/](https://docs.crex24.com/trade-api/v2/)
 
-所有接口方法的初始化都与huobi提供的方法相同。更多细节 [src/api](https://github.com/zhouaini528/huobi-php/tree/master/src/Api)
+所有接口方法的初始化都与huobi提供的方法相同。更多细节 [src/api](https://github.com/zhouaini528/crex24-php/tree/master/src/Api)
 
 大部分的接口已经完成，使用者可以根据我的设计方案继续扩展，欢迎与我一起迭代它。
 

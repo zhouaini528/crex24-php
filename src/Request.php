@@ -16,8 +16,6 @@ class Request
 
     protected $host='';
 
-    protected $account_id='';
-
 
 
     protected $nonce='';
@@ -38,7 +36,7 @@ class Request
     {
         $this->key=$data['key'] ?? '';
         $this->secret=$data['secret'] ?? '';
-        $this->host=$data['host'] ?? 'https://api.Crex24.pro';
+        $this->host=$data['host'] ?? 'https://api.crex24.com';
 
         $this->options=$data['options'] ?? [];
     }
@@ -56,71 +54,40 @@ class Request
         $this->options();
     }
 
-    /**
-     * 过期时间
+    /*
+     *
      * */
     protected function nonce(){
-        $this->nonce=gmdate('Y-m-d\TH:i:s');
+        $this->nonce=floor(microtime(true) * 1000);
     }
 
-    /**
-     * 签名
+    /*
+     *
      * */
     protected function signature(){
-        $param = [
-            'AccessKeyId' => $this->key,
-            'SignatureMethod' => 'HmacSHA256',
-            'SignatureVersion' => 2,
-            'Timestamp' => $this->nonce,
-        ];
-
-        if(!empty($this->data)) {
-            $param=array_merge($param,$this->data);
-        }
-
-        $param=$this->sort($param);
-
-        $host_tmp=explode('https://', $this->host);
-        if(isset($host_tmp[1])) $temp=$this->type . "\n" . $host_tmp[1] . "\n" . $this->path . "\n" . implode('&', $param);
-        $signature=base64_encode(hash_hmac('sha256', $temp ?? '', $this->secret, true));
-
-        $param[]="Signature=" . urlencode($signature);
-
-        $this->signature=implode('&', $param);
+        $message = $this->path.$this->nonce.json_encode($this->data);
+        $this->signature = base64_encode(hash_hmac('sha512', $message , base64_decode($this->secret) , true));
     }
 
-    /**
-     * 根据Crex24规则排序
-     * */
-    protected function sort($param)
-    {
-        $u = [];
-        $sort_rank = [];
-        foreach ($param as $k => $v) {
-            $u[] = $k . "=" . urlencode($v);
-            $sort_rank[] = ord($k);
-        }
-        asort($u);
-
-        return $u;
-    }
-
-    /**
-     * 默认头部信息
+    /*
+     *
      * */
     protected function headers(){
         $this->headers=[
             'Content-Type' => 'application/json',
+            'X-CREX24-API-KEY:' . $this->key,
+            'X-CREX24-API-NONCE:' . $this->nonce,
+            'X-CREX24-API-SIGN:' . $this->signature
         ];
     }
 
-    /**
-     * 请求设置
+    /*
+     *
      * */
     protected function options(){
         $this->options=array_merge([
             'headers'=>$this->headers,
-            //'verify'=>false   //关闭证书认证
+            //'verify'=>false
         ],$this->options);
 
         $this->options['timeout'] = $this->options['timeout'] ?? 60;
@@ -134,38 +101,31 @@ class Request
         }
     }
 
-    /**
-     * 发送http
+    /*
+     *
      * */
     protected function send(){
         $client = new \GuzzleHttp\Client();
 
-        if(!empty($this->data)) {
-            $this->options['body']=json_encode($this->data);
-        }
+        $url=$this->host.$this->path;
 
-        $response = $client->request($this->type, $this->host.$this->path.'?'.$this->signature, $this->options);
+        if($this->type=='GET') $url.= empty($this->data) ? '' : '?'.http_build_query($this->data);
+        else $this->options['body']=json_encode($this->data);
+        /*echo $url.PHP_EOL;
+        print_r($this->options);*/
+        $response = $client->request($this->type, $url, $this->options);
 
         return $response->getBody()->getContents();
     }
 
     /*
-     * 执行流程
+     *
      * */
     protected function exec(){
         $this->auth();
 
-        //可以记录日志
         try {
-            $temp=json_decode($this->send(),true);
-            if(isset($temp['status']) && $temp['status']=='error') {
-                $temp['_method']=$this->type;
-                $temp['_url']=$this->host.$this->path;
-                $temp['_httpcode']=200;
-                throw new Exception(json_encode($temp));
-            }
-
-            return $temp;
+            return json_decode($this->send(),true);
         }catch (RequestException $e){
             if(method_exists($e->getResponse(),'getBody')){
                 $contents=$e->getResponse()->getBody()->getContents();
@@ -184,7 +144,6 @@ class Request
 
             $temp['_httpcode']=$e->getCode();
 
-            //TODO  该流程可以记录各种日志
             throw new Exception(json_encode($temp));
         }
     }

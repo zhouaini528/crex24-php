@@ -1,4 +1,3 @@
 <?php
-$key='bg5t6ygr6y-a3a80ce0-7c838039-c9099';
-$secret='846e1df9-ef59878b-faf3e203-90c9f';
-$account_id='5720968';
+$key='54955d8b-4497-4d7f-b9b6-b2a99b4aff47';
+$secret='jEkmk+mrPjQeDbYxqDvV4CPNbLUpsqZuquTBDK5q8xzxruymyWRN7R9ng6E8PEKB4Ss8UTfi1yHIZTRMH1orhQ==';
