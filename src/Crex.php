@@ -3,14 +3,13 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Crex24;
+namespace Lin\Crex;
 
+use Lin\Crex\Api\Account;
+use Lin\Crex\Api\Market;
+use Lin\Crex\Api\Trading;
 
-use Lin\Crex24\Api\Account;
-use Lin\Crex24\Api\Market;
-use Lin\Crex24\Api\Trading;
-
-class Crex24
+class Crex
 {
     protected $key;
     protected $secret;
@@ -18,7 +17,7 @@ class Crex24
 
     protected $options=[];
 
-    function __construct(string $key='',string $secret='',string $host='https://api.crex24.com'){
+    function __construct(string $key='',string $secret='',string $host='https://api.Crex.com'){
         $this->key=$key;
         $this->secret=$secret;
         $this->host=$host;

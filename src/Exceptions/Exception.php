@@ -1,5 +1,5 @@
 <?php
-namespace Lin\Crex24\Exceptions;
+namespace Lin\Crex\Exceptions;
 
 class Exception extends \Exception
 {

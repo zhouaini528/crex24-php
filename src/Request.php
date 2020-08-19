@@ -3,10 +3,10 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Crex24;
+namespace Lin\Crex;
 
 use GuzzleHttp\Exception\RequestException;
-use Lin\Crex24\Exceptions\Exception;
+use Lin\Crex\Exceptions\Exception;
 
 class Request
 {
@@ -75,9 +75,9 @@ class Request
     protected function headers(){
         $this->headers=[
             'Content-Type' => 'application/json',
-            'X-CREX24-API-KEY:' . $this->key,
-            'X-CREX24-API-NONCE:' . $this->nonce,
-            'X-CREX24-API-SIGN:' . $this->signature
+            'X-Crex-API-KEY:' . $this->key,
+            'X-Crex-API-NONCE:' . $this->nonce,
+            'X-Crex-API-SIGN:' . $this->signature
         ];
     }
 

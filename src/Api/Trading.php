@@ -3,9 +3,9 @@
  * @author lin <465382251@qq.com>
  * */
 
-namespace Lin\Crex24\Api;
+namespace Lin\Crex\Api;
 
-use Lin\Crex24\Request;
+use Lin\Crex\Request;
 
 class Trading extends Request
 {

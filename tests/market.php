@@ -1,17 +1,15 @@
 <?php
-
-
 /**
  * @author lin <465382251@qq.com>
  * */
-use Lin\Crex24;
+use Lin\Crex;
 
 require __DIR__ .'../../../vendor/autoload.php';
 
-$crex24=new Crex24();
+$crex=new Crex();
 
 //You can set special needs
-$crex24->setOptions([
+$crex->setOptions([
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
 
