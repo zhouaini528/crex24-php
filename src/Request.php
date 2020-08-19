@@ -65,7 +65,8 @@ class Request
      *
      * */
     protected function signature(){
-        $message = $this->path.$this->nonce.json_encode($this->data);
+        $message = $this->path.$this->nonce;
+        if(!empty($this->data)) $message .= json_encode($this->data);
         $this->signature = base64_encode(hash_hmac('sha512', $message , base64_decode($this->secret) , true));
     }
 
@@ -75,9 +76,9 @@ class Request
     protected function headers(){
         $this->headers=[
             'Content-Type' => 'application/json',
-            'X-Crex-API-KEY:' . $this->key,
-            'X-Crex-API-NONCE:' . $this->nonce,
-            'X-Crex-API-SIGN:' . $this->signature
+            'X-CREX24-API-KEY' => $this->key,
+            'X-CREX24-API-NONCE' => $this->nonce,
+            'X-CREX24-API-SIGN' => $this->signature
         ];
     }
 
@@ -111,8 +112,8 @@ class Request
 
         if($this->type=='GET') $url.= empty($this->data) ? '' : '?'.http_build_query($this->data);
         else $this->options['body']=json_encode($this->data);
-        /*echo $url.PHP_EOL;
-        print_r($this->options);*/
+        echo $url.PHP_EOL;
+        print_r($this->options);
         $response = $client->request($this->type, $url, $this->options);
 
         return $response->getBody()->getContents();

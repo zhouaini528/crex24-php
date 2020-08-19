@@ -72,7 +72,7 @@ class Market extends Request
     /*
      *GET https://api.crex24.com/v2/public/tradingFeeSchedules
      * */
-    public function get(array $data=[]){
+    public function getTradingFeeSchedules(array $data=[]){
         $this->type='GET';
         $this->path='/v2/public/TradingFeeSchedules';
         $this->data=$data;

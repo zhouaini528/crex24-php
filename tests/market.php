@@ -2,9 +2,10 @@
 /**
  * @author lin <465382251@qq.com>
  * */
-use Lin\Crex;
 
-require __DIR__ .'../../../vendor/autoload.php';
+use Lin\Crex\Crex;
+
+require __DIR__ .'../../vendor/autoload.php';
 
 $crex=new Crex();
 
@@ -26,8 +27,70 @@ $crex->setOptions([
 ]);
 
 
+try {
+    $result=$crex->market()->getCurrencies();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
 
+try {
+    $result=$crex->market()->getInstruments();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
 
+try {
+    $result=$crex->market()->getTickers();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
 
+try {
+    $result=$crex->market()->getRecentTrades([
+        'instrument'=>'LTC-BTC'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$crex->market()->getOrderBook([
+        'instrument'=>'LTC-BTC',
+        'limit'=>10
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$crex->market()->getOhlcv([
+        'instrument'=>'LTC-BTC',
+        'granularity'=>'30m'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$crex->market()->getTradingFeeSchedules();
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
+
+try {
+    $result=$crex->market()->getWithdrawalFees([
+        'currency'=>'LTC'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r(json_decode($e->getMessage(),true));
+}
 
 

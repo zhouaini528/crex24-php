@@ -17,7 +17,7 @@ class Crex
 
     protected $options=[];
 
-    function __construct(string $key='',string $secret='',string $host='https://api.Crex.com'){
+    function __construct(string $key='',string $secret='',string $host='https://api.crex24.com'){
         $this->key=$key;
         $this->secret=$secret;
         $this->host=$host;
