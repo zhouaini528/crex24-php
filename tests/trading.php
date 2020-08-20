@@ -28,36 +28,12 @@ $crex->setOptions([
 ]);
 
 try {
-    $result=$crex->account()->getBalance([
-        //'currency'=>'FREE'
+    $result=$crex->trading()->postPlaceOrder([
+
     ]);
     print_r($result);
 }catch (\Exception $e){
     print_r($e->getMessage());
 }
 
-try {
-    $result=$crex->account()->getDepositAddress([
-        'currency'=>'BTC'
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r($e->getMessage());
-}
-
-try {
-    $result=$crex->account()->getDepositAddress([
-        'currency'=>'BTC'
-    ]);
-    print_r($result);
-}catch (\Exception $e){
-    print_r($e->getMessage());
-}
-
-try {
-    $result=$crex->account()->getMoneyTransfers();
-    print_r($result);
-}catch (\Exception $e){
-    print_r($e->getMessage());
-}
 

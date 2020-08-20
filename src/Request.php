@@ -65,8 +65,12 @@ class Request
      *
      * */
     protected function signature(){
-        $message = $this->path.$this->nonce;
-        if(!empty($this->data)) $message .= json_encode($this->data);
+        $message=$this->path;
+        if($this->type=='GET') $message.= empty($this->data) ? '' : '?'.http_build_query($this->data);
+        $message .= $this->nonce;
+
+        if($this->type=='POST' && !empty($this->data)) $message .= json_encode($this->data);
+
         $this->signature = base64_encode(hash_hmac('sha512', $message , base64_decode($this->secret) , true));
     }
 
@@ -112,8 +116,8 @@ class Request
 
         if($this->type=='GET') $url.= empty($this->data) ? '' : '?'.http_build_query($this->data);
         else $this->options['body']=json_encode($this->data);
-        echo $url.PHP_EOL;
-        print_r($this->options);
+        /*echo $url.PHP_EOL;
+        print_r($this->options);*/
         $response = $client->request($this->type, $url, $this->options);
 
         return $response->getBody()->getContents();

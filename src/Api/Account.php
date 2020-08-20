@@ -62,8 +62,8 @@ class Account extends Request
     /*
      *POST https://api.crex24.com/v2/account/withdraw
      * */
-    public function getWithdraw(array $data=[]){
-        $this->type='GET';
+    public function postWithdraw(array $data=[]){
+        $this->type='POST';
         $this->path='/v2/account/withdraw';
         $this->data=$data;
         return $this->exec();
