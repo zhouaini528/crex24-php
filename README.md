@@ -2,7 +2,7 @@
 
 Crex24 docs [https://docs.crex24.com/trade-api/v2/](https://docs.crex24.com/trade-api/v2/)
 
-All interface methods are initialized the same as those provided by huobi. See details [src/api](https://github.com/zhouaini528/crex24-php/tree/master/src/Api)
+All interface methods are initialized the same as those provided by Crex24. See details [src/api](https://github.com/zhouaini528/crex24-php/tree/master/src/Api)
 
 Most of the interface is now complete, and the user can continue to extend it based on my design, working with me to improve it.
 
