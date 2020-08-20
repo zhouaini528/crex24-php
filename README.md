@@ -40,15 +40,15 @@ Most of the interface is now complete, and the user can continue to extend it ba
 
 #### Installation
 ```
-composer require linwj/huobi
+composer require linwj/crex24
 ```
 
-Support for more request Settings [More](https://github.com/zhouaini528/huobi-php/blob/master/tests/spot/proxy.php#L21)
+Support for more request Settings
 ```php
-$huobi=new HuobiSpot();
+$crex=new Crex();
 
 //You can set special needs
-$huobi->setOptions([
+$crex->setOptions([
     //Set the request timeout to 60 seconds by default
     'timeout'=>10,
     
@@ -64,4 +64,176 @@ $huobi->setOptions([
     //'verify'=>false,
 ]);
 ```
+
+### Spot API
+
+Market related API [More](https://github.com/zhouaini528/crex24-php/blob/master/tests/market.php)
+```php
+try {
+    $result=$crex->market()->getCurrencies();
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->market()->getInstruments();
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->market()->getTickers();
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->market()->getRecentTrades([
+        'instrument'=>'LTC-BTC'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->market()->getOrderBook([
+        'instrument'=>'LTC-BTC',
+        'limit'=>10
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->market()->getOhlcv([
+        'instrument'=>'LTC-BTC',
+        'granularity'=>'30m'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->market()->getTradingFeeSchedules();
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->market()->getWithdrawalFees([
+        'currency'=>'LTC'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+```
+
+Accounts related API [More](https://github.com/zhouaini528/crex24-php/blob/master/tests/account.php)
+```php
+try {
+    $result=$crex->account()->getBalance([
+        //'currency'=>'FREE'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->account()->getDepositAddress([
+        'currency'=>'BTC'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->account()->getDepositAddress([
+        'currency'=>'BTC'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->account()->getMoneyTransfers();
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+```
+
+Order related API [More](https://github.com/zhouaini528/crex24-php/blob/master/tests/order.php)
+
+```php
+try {
+    $result=$crex->trading()->postPlaceOrder([
+        'instrument'=>'ETH-BTC',
+        'side'=>'buy',
+        'type'=>'limit',
+        'volume'=>'100',
+        'price'=>'0.01',
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->trading()->getOrderStatus([
+        'id'=>'xxxxxxxxxx'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->trading()->getOrderTrades([
+        'id'=>'xxxxxxxxxx'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->trading()->postCancelOrdersById([
+        //'id'=>'xxxxxxxxxx'
+        'id'=>['111111','22222222']
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->trading()->getOrderHistory();
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->trading()->getTradeHistory();
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+```
+
+[More Tests](https://github.com/zhouaini528/crex24-php/tree/master/tests)
+
+[More API](https://github.com/zhouaini528/crex24-php/tree/master/src/Api)
+
 

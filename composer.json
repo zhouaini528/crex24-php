@@ -1,9 +1,9 @@
 {
-    "name": "linwj/crex",
+    "name": "linwj/crex24",
     "type": "library",
-    "description": "Crex API Like the official document interface, Support for arbitrary extension.",
+    "description": "Crex24 API Like the official document interface, Support for arbitrary extension.",
     "license": "MIT",
-    "keywords": ["crex","bitmex", "binance", "okex", "huobi","kucoin","kumex"],
+    "keywords": ["crex24","bitmex", "binance", "okex", "huobi","kucoin","kumex"],
     "authors": [
         {
             "name": "linwenjun",

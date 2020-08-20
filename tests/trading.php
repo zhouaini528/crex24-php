@@ -29,11 +29,55 @@ $crex->setOptions([
 
 try {
     $result=$crex->trading()->postPlaceOrder([
-
+        'instrument'=>'ETH-BTC',
+        'side'=>'buy',
+        'type'=>'limit',
+        'volume'=>'100',
+        'price'=>'0.01',
     ]);
     print_r($result);
 }catch (\Exception $e){
     print_r($e->getMessage());
 }
 
+try {
+    $result=$crex->trading()->getOrderStatus([
+        'id'=>'xxxxxxxxxx'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
 
+try {
+    $result=$crex->trading()->getOrderTrades([
+        'id'=>'xxxxxxxxxx'
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->trading()->postCancelOrdersById([
+        //'id'=>'xxxxxxxxxx'
+        'id'=>['111111','22222222']
+    ]);
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->trading()->getOrderHistory();
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
+
+try {
+    $result=$crex->trading()->getTradeHistory();
+    print_r($result);
+}catch (\Exception $e){
+    print_r($e->getMessage());
+}
