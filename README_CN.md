@@ -173,7 +173,7 @@ try {
 }
 ```
 
-Order related API [More](https://github.com/zhouaini528/crex24-php/blob/master/tests/order.php)
+Order related API [More](https://github.com/zhouaini528/crex24-php/blob/master/tests/trading.php)
 
 ```php
 try {
