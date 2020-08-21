@@ -67,8 +67,10 @@ $crex->setOptions([
 
 ### Spot API
 
-Market related API [More](https://github.com/zhouaini528/crex24-php/blob/master/tests/market.php)
+Public Market related API [More](https://github.com/zhouaini528/crex24-php/blob/master/tests/market.php)
 ```php
+$crex=new Crex();
+
 try {
     $result=$crex->market()->getCurrencies();
     print_r($result);
@@ -138,6 +140,8 @@ try {
 
 Accounts related API [More](https://github.com/zhouaini528/crex24-php/blob/master/tests/account.php)
 ```php
+$crex=new Crex($key,$secret);
+
 try {
     $result=$crex->account()->getBalance([
         //'currency'=>'FREE'
@@ -176,6 +180,8 @@ try {
 Order related API [More](https://github.com/zhouaini528/crex24-php/blob/master/tests/trading.php)
 
 ```php
+$crex=new Crex($key,$secret);
+
 try {
     $result=$crex->trading()->postPlaceOrder([
         'instrument'=>'ETH-BTC',
